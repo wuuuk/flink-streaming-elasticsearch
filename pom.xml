@@ -27,11 +27,12 @@
     </properties>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/com.alibaba.ververica/flink-connector-mysql-cdc -->
+        <!--使用RocksDBStateBackend的方式进行checkpoint-->
         <dependency>
-            <groupId>com.alibaba.ververica</groupId>
-            <artifactId>flink-connector-mysql-cdc</artifactId>
-            <version>1.1.1</version>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-statebackend-rocksdb_${scala.binary.version}</artifactId>
+            <version>${flink.version}</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
@@ -62,40 +63,43 @@
             <scope>compile</scope>
         </dependency>
 
+        <!--flink kafka 连接器-->
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-statebackend-rocksdb_2.11</artifactId>
+            <artifactId>flink-connector-kafka_${scala.binary.version}</artifactId>
             <version>${flink.version}</version>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-connector-kafka_2.11</artifactId>
+            <artifactId>flink-avro</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+
+        <!--flink mysql 连接器，但是一般使用cdc-->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-jdbc_${scala.binary.version}</artifactId>
             <version>${flink.version}</version>
             <scope>compile</scope>
         </dependency>
 
+        <!--flink mysql cdc连接器，一般使用这个而不是jdbc-->
+        <dependency>
+            <groupId>com.alibaba.ververica</groupId>
+            <artifactId>flink-connector-mysql-cdc</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+        <!--flink es连接器-->
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-connector-jdbc_2.11</artifactId>
+            <artifactId>flink-connector-elasticsearch7_${scala.binary.version}</artifactId>
             <version>${flink.version}</version>
             <scope>compile</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-connector-elasticsearch7_2.11</artifactId>
-            <version>${flink.version}</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-connector-elasticsearch7_2.11</artifactId>
-            <version>${flink.version}</version>
-            <scope>compile</scope>
-        </dependency>
 
         <!-- 利用Java开发 -->
         <dependency>
@@ -111,6 +115,7 @@
             <version>${flink.version}</version>
             <scope>compile</scope>
         </dependency>
+
         <!-- 使用Blink Planner -->
         <dependency>
             <groupId>org.apache.flink</groupId>
@@ -133,9 +138,10 @@
             <version>${flink.version}</version>
             <scope>compile</scope>
         </dependency>
+
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-clients_2.11</artifactId>
+            <artifactId>flink-clients_${scala.binary.version}</artifactId>
             <version>${flink.version}</version>
             <scope>compile</scope>
         </dependency>
@@ -158,22 +164,36 @@
             <version>1.7.25</version>
             <scope>compile</scope>
         </dependency>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.22</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.apache.flink</groupId>-->
-<!--            <artifactId>flink-table_2.11</artifactId>-->
-<!--            <version>${flink.version}</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
+
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-table-planner_2.11</artifactId>
+            <artifactId>flink-table-planner_${scala.binary.version}</artifactId>
             <version>${flink.version}</version>
             <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.75</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.msgpack</groupId>
+            <artifactId>msgpack</artifactId>
+            <version>0.6.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.12.6</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
